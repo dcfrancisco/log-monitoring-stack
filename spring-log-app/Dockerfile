@@ -1,10 +1,7 @@
-FROM maven:3.9.6-eclipse-temurin-17 as builder
+FROM openjdk:21-jdk-slim
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+# Update system packages to reduce vulnerabilities
+RUN apt-get update && apt-get upgrade -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-FROM eclipse-temurin:17-jre
-WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY target/*.jar /app/app.jar
+ENTRYPOINT ["java", "-jar", "/app//app.jar"]

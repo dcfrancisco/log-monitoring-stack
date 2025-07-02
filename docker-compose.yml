@@ -42,19 +42,19 @@ services:
     networks:
       - elk
 
-  elastalert:
-    image: jertel/elastalert2:latest
-    container_name: elastalert
-    volumes:
-      - ./elastalert/config.yaml:/opt/elastalert/config.yaml
-      - ./elastalert/rules:/opt/elastalert/rules
-      - ./elastalert/smtp_auth.yaml:/opt/elastalert/smtp_auth.yaml
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTALERT_CONFIG=/opt/elastalert/config.yaml
-    networks:
-      - elk
+  # elastalert:
+  #   image: jertel/elastalert2:latest
+  #   container_name: elastalert
+  #   volumes:
+  #     - ./elastalert/config.yaml:/opt/elastalert/config.yaml
+  #     - ./elastalert/rules:/opt/elastalert/rules
+  #     - ./elastalert/smtp_auth.yaml:/opt/elastalert/smtp_auth.yaml
+  #   depends_on:
+  #     - elasticsearch
+  #   environment:
+  #     - ELASTALERT_CONFIG=/opt/elastalert/config.yaml
+  #   networks:
+  # - elk
 
   springlog:
     build:
