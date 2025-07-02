@@ -1,0 +1,74 @@
+version: '3.7'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - elk
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.9
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5000:5000"
+    networks:
+      - elk
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.9
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
+
+  elastalert:
+    image: jertel/elastalert2:latest
+    container_name: elastalert
+    volumes:
+      - ./elastalert/config.yaml:/opt/elastalert/config.yaml
+      - ./elastalert/rules:/opt/elastalert/rules
+      - ./elastalert/smtp_auth.yaml:/opt/elastalert/smtp_auth.yaml
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTALERT_CONFIG=/opt/elastalert/config.yaml
+    networks:
+      - elk
+
+  springlog:
+    build:
+      context: ./spring-log-app
+    container_name: springlog
+    depends_on:
+      - logstash
+    networks:
+      - elk
+
+volumes:
+  esdata:
+
+networks:
+  elk:

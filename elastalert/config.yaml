@@ -1,0 +1,13 @@
+es_host: elasticsearch
+es_port: 9200
+writeback_index: elastalert_status
+buffer_time:
+  minutes: 1
+run_every:
+  seconds: 60
+rules_folder: /opt/elastalert/rules
+smtp_host: smtp.gmail.com
+smtp_port: 587
+smtp_ssl: true
+from_addr: your.email@gmail.com
+smtp_auth_file: /opt/elastalert/smtp_auth.yaml

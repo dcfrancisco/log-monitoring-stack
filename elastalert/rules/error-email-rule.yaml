@@ -1,0 +1,13 @@
+name: "Error log alert"
+type: frequency
+index: app-logs-*
+num_events: 3
+timeframe:
+  minutes: 1
+filter:
+  - term:
+      level: "ERROR"
+alert:
+  - "email"
+email:
+  - your.email@gmail.com

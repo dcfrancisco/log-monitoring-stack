@@ -1,0 +1,30 @@
+# Maven
+/target/
+
+# Spring Boot specific
+*.jar
+*.war
+
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Others
+*.swp
