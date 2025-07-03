@@ -9,6 +9,7 @@ This project sets up a complete **log aggregation and visualization stack** usin
 
 ## 📦 Project Structure
 
+```
 log-monitoring-stack/
 ├── docker-compose.yml
 ├── logstash/
@@ -22,6 +23,7 @@ log-monitoring-stack/
 │           ├── java/…
 │           └── resources/
 │               └── logback-spring.xml
+```
 
 ---
 
