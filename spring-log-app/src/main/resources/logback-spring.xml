@@ -1,45 +1,9 @@
 <configuration>
-  <!-- Console appender for immediate visibility -->
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
-  </appender>
-
-  <!-- File appender as fallback -->
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>/app/logs/application.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>/app/logs/application.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-      <maxFileSize>100MB</maxFileSize>
-      <maxHistory>30</maxHistory>
-      <totalSizeCap>3GB</totalSizeCap>
-    </rollingPolicy>
-    <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
-  </appender>
-
-  <!-- Logstash appender with connection pool and recovery -->
   <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <destination>logstash:5000</destination>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-    <connectionTimeout>5000</connectionTimeout>
-    <reconnectionDelay>10000</reconnectionDelay>
-    <includeCallerData>true</includeCallerData>
   </appender>
-
-  <!-- Async wrapper for Logstash to prevent blocking -->
-  <appender name="ASYNC_LOGSTASH" class="ch.qos.logback.classic.AsyncAppender">
-    <appender-ref ref="LOGSTASH" />
-    <neverBlock>true</neverBlock>
-    <queueSize>512</queueSize>
-    <discardingThreshold>0</discardingThreshold>
-  </appender>
-
   <root level="INFO">
-    <appender-ref ref="CONSOLE" />
-    <appender-ref ref="FILE" />
-    <appender-ref ref="ASYNC_LOGSTASH" />
+    <appender-ref ref="LOGSTASH"/>
   </root>
 </configuration>
