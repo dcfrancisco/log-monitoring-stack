@@ -6,8 +6,8 @@ buffer_time:
 run_every:
   seconds: 60
 rules_folder: /opt/elastalert/rules
-smtp_host: smtp.gmail.com
-smtp_port: 587
-smtp_ssl: true
-from_addr: your.email@gmail.com
+smtp_host: localhost
+smtp_port: 2525
+smtp_ssl: false
+from_addr: dcfran@gmail.com
 smtp_auth_file: /opt/elastalert/smtp_auth.yaml
