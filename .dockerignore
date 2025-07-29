@@ -1,0 +1,32 @@
+# Documentation
+README.md
+*.md
+
+# Git
+.git
+.gitignore
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Assets and downloads (these are large and not needed for builds)
+assets/
+
+# Individual service contexts (only needed when building specific services)
+elasticsearch/
+kibana/
+logstash/
+elastalert/
+
+# Docker compose files (not needed in build context)
+docker-compose*.yml

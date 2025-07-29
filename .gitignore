@@ -1,4 +1,13 @@
+# VSCode
+
+.vscode/
+
+# Spring Boot
+target/
+.idea/
+
 # MacOS
 .DS_Store
 
 **/*.zip
+**/*.tar.gz
