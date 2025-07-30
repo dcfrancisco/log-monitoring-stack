@@ -1,11 +1,16 @@
-# Spring Boot Logging Stack (ELK)
+# Spring Boot Logging Stack (ELK) - Custom Build
 
-This project sets up a complete **log aggregation and visualization stack** using:
+This project sets up a complete **log aggregation and visualization stack** using custom Docker images built from official installers:
 
 - 🟡 **Spring Boot** – emits structured JSON logs
 - 🔷 **Logstash** – receives logs via TCP and pushes to Elasticsearch
-- 🔶 **Elasticsearch** – stores and indexes logs
-- 🔵 **Kibana** – visualizes and searches logs
+- 🔶 **Elasticsearch** – stores and indexes logs (custom Docker image)
+- 🔵 **Kibana** – visualizes and searches logs (custom Docker image)
+
+## 🌟 **Two Versions Available:**
+
+- **🚀 Main Branch** (Current): Advanced setup with custom Dockerfiles built from official installers
+- **📝 [Simple Version](https://github.com/dcfrancisco/log-monitoring-stack/tree/simple-version)**: Basic setup using official Docker images - perfect for quick starts
 
 ## 📦 Project Structure
 
@@ -87,3 +92,4 @@ To delete persistent Elasticsearch volume:
 docker volume rm log-monitoring-stack_esdata
 
 
+```
