@@ -1,4 +1,10 @@
 # MacOS
 .DS_Store
 
+# VSCode
+.vscode/
+
 **/*.zip
+*.zip
+**/*.tar.gz
+*.tar.gz
