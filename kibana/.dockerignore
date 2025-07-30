@@ -1,0 +1,35 @@
+# Documentation
+README.md
+*.md
+
+# Git
+.git
+.gitignore
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts (keep only the installer we need)
+*.zip
+*.deb
+*.rpm
+
+# Exclude everything except what we need
+*
+!kibana-7.17.9-linux-x86_64.tar.gz
+!Dockerfile
+!kibana.yml

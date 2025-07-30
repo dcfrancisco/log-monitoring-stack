@@ -1,6 +1,7 @@
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    build:
+      context: ./elasticsearch
     container_name: elasticsearch
     environment:
       - discovery.type=single-node
@@ -17,9 +18,16 @@ services:
       - esdata:/usr/share/elasticsearch/data
     networks:
       - elk
+    healthcheck:
+      test:
+        ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.17.9
+    build:
+      context: ./logstash
     container_name: logstash
     volumes:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
@@ -31,14 +39,16 @@ services:
       - elk
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.9
+    build:
+      context: ./kibana
     container_name: kibana
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     ports:
       - "5601:5601"
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
     networks:
       - elk
 
