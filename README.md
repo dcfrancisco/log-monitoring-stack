@@ -1,6 +1,6 @@
 # 🚀 Spring Boot ELK Stack - Production-Ready Log Monitoring
 
-> **A complete, production-ready log aggregation and visualization stack with custom Do## 🧪 Verify the Logs in Kibana
+> \*\*A complete, production-ready log aggregation and visualization stack with custom Do## 🧪 Verify the Logs in Kibana
 
 1. Visit http://localhost:5601
 2. Go to **Stack Management** → **Index Patterns**
@@ -9,7 +9,7 @@
 5. Select `@timestamp` as the time filter field
 6. Click "**Create index pattern**"
 
-Now go to the **Discover** tab and you should see log entries from the Spring Boot app.uilt from official ELK installers**
+Now go to the **Discover** tab and you should see log entries from the Spring Boot app.uilt from official ELK installers\*\*
 
 [![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker)](https://docs.docker.com/compose/)
 [![ELK Stack](https://img.shields.io/badge/ELK-7.17.9-orange?logo=elastic)](https://www.elastic.co/elastic-stack/)
@@ -111,16 +111,19 @@ cd log-monitoring-stack
 Download the official installers and place them in their respective folders:
 
 **Elasticsearch** (`elasticsearch/`):
+
 ```bash
 wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.9-linux-x86_64.tar.gz -P elasticsearch/
 ```
 
 **Kibana** (`kibana/`):
+
 ```bash
 wget https://artifacts.elastic.co/downloads/kibana/kibana-7.17.9-linux-x86_64.tar.gz -P kibana/
 ```
 
 **Logstash** (`logstash/`):
+
 ```bash
 wget https://artifacts.elastic.co/downloads/logstash/logstash-7.17.9-linux-x86_64.tar.gz -P logstash/
 ```
@@ -132,6 +135,7 @@ docker-compose up --build
 ```
 
 This launches:
+
 - **Elasticsearch** on http://localhost:9200 (custom Ubuntu-based image)
 - **Logstash** on port 5000 (custom Ubuntu-based image)
 - **Kibana** on http://localhost:5601 (custom Ubuntu-based image)
@@ -142,6 +146,7 @@ This launches:
 This project uses **custom Docker images** built from official ELK installers with Ubuntu 22.04 as the base:
 
 ### Key Features:
+
 - 🐧 **Ubuntu 22.04** base image for better compatibility
 - 📦 **Local installers** for faster, offline-capable builds
 - 🔒 **Dedicated users** for each service (elasticsearch, kibana, logstash)
@@ -149,6 +154,7 @@ This project uses **custom Docker images** built from official ELK installers wi
 - 🏥 **Health checks** for proper startup ordering
 
 ### Benefits:
+
 - **Faster builds** - No internet downloads during build
 - **Customizable** - Easy to modify base image or add packages
 - **Reliable** - Consistent builds without network dependencies
@@ -156,17 +162,12 @@ This project uses **custom Docker images** built from official ELK installers wi
 
 ---
 
-🧪 Verify the Logs in Kibana
-	1.	Visit http://localhost:5601
-	2.	Go to Stack Management → Index Patterns
-	3.	Click “Create index pattern”
-	4.	Enter:
+🧪 Verify the Logs in Kibana 1. Visit http://localhost:5601 2. Go to Stack Management → Index Patterns 3. Click “Create index pattern” 4. Enter:
 
-app-logs-*
+app-logs-\*
 
-
-	5.	Select @timestamp as the time filter field
-	6.	Click “Create index pattern”
+    5.	Select @timestamp as the time filter field
+    6.	Click “Create index pattern”
 
 Now go to the Discover tab and you should see log entries from the Spring Boot app.
 
@@ -185,22 +186,24 @@ logger.info("Sample info log");
 logger.error("Sample error log");
 ```
 
-
 ---
 
 ## 🛠️ Configuration Files
 
 ### Elasticsearch (`elasticsearch/elasticsearch.yml`):
+
 - Single-node discovery
 - Security disabled for development
 - Memory lock enabled
 
 ### Kibana (`kibana/kibana.yml`):
+
 - Connects to Elasticsearch via Docker network
 - Encryption key configured
 - Security disabled for development
 
 ### Logstash (`logstash/pipeline/logstash.conf`):
+
 - TCP input on port 5000
 - JSON parsing
 - Output to Elasticsearch
@@ -212,14 +215,17 @@ logger.error("Sample error log");
 ### Common Issues:
 
 **Kibana can't connect to Elasticsearch:**
+
 - Check if Elasticsearch is healthy: `curl http://localhost:9200/_cluster/health`
 - Verify Docker network connectivity
 
 **Build fails:**
+
 - Ensure all installer files are downloaded to correct directories
 - Check .dockerignore files aren't excluding necessary files
 
 **Memory issues:**
+
 - Increase Docker memory allocation (recommended: 4GB+)
 - Adjust `ES_JAVA_OPTS` in docker-compose.yml
 
